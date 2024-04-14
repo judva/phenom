@@ -1,0 +1,33 @@
+local player = game.Players.LocalPlayer
+local character = player.Character
+local humanoid = character:WaitForChild("Humanoid")
+
+local function findClosestPlayer()
+    local closestPlayer = nil
+    local shortestDistance = math.huge
+
+    for _, otherPlayer in ipairs(game.Players:GetPlayers()) do
+        if otherPlayer ~= player and otherPlayer.Character and otherPlayer.Character:FindFirstChild("HumanoidRootPart") then
+            local distance = (otherPlayer.Character.HumanoidRootPart.Position - character.HumanoidRootPart.Position).Magnitude
+            if distance < shortestDistance then
+                shortestDistance = distance
+                closestPlayer = otherPlayer
+            end
+        end
+    end
+
+    return closestPlayer
+end
+
+-- attaches to the player, not the ball
+local function attachToClosestPlayer()
+    local closestPlayer = findClosestPlayer()
+    if closestPlayer then
+        local rootPart = closestPlayer.Character.HumanoidRootPart
+        character:SetPrimaryPartCFrame(rootPart.CFrame)
+    else
+        print("No players found")
+    end
+end
+
+attachToClosestPlayer()
