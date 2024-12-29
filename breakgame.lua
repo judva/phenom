@@ -1,5 +1,7 @@
 -- Touch fling gui
 
+-- Tutorial on how to use it to break game: Execute it 2 times, then mag ball, then turn on both touch flings, then reset, then click
+
 -- Gui to Lua (VIP VERSION)
 -- Version: 6.9
 
